@@ -1,0 +1,85 @@
+
+{% extends "leagues/base.html" %}
+
+{% block content %}
+<div class="page-content standings-page">
+
+    <div class="standings-heading">
+        <div>
+            <span class="standings-eyebrow">NDVARZESH / LEAGUE TABLE</span>
+            <h1>جدول رده‌بندی</h1>
+            <p>جدول امتیازات و عملکرد تیم‌های لیگ</p>
+        </div>
+    </div>
+
+    <div class="standings-toolbar">
+        <div>
+            <span>لیگ انتخاب‌شده</span>
+            <h2>{{ league.name }}</h2>
+            <small>{{ league.season.name }}</small>
+        </div>
+
+        <form method="get">
+            <select name="leagueID" onchange="this.form.submit()">
+                {% for item in leagues %}
+                    <option value="{{ item.id }}"
+                        {% if league and item.id == league.id %}selected{% endif %}>
+                        {{ item.name }} - {{ item.season.name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </form>
+    </div>
+
+    <div class="standings-table-wrapper">
+        <table class="standings-table">
+            <thead>
+                <tr>
+                    <th>رتبه</th>
+                    <th></th>
+                    <th class="team-column">تیم</th>
+                    <th>بازی</th>
+                    <th>برد</th>
+                    <th>مساوی</th>
+                    <th>باخت</th>
+                    <th>زده</th>
+                    <th>خورده</th>
+                    <th>تفاضل</th>
+                    <th>امتیاز</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for item in standings %}
+                <tr>
+                    <td class="rank-cell">{{ forloop.counter }}</td>
+                    <td>
+                        {% if item.team.club.logo %}
+                        <img class="team-logo" src="{{ item.team.club.logo.url }}" alt="{{ item.team.club.name }}">
+                        {% else %}
+                        <span class="team-logo-placeholder">⚽</span>
+                        {% endif %}
+                    </td>
+                    <td class="team-name">{{ item.team.name }}</td>
+                    <td>{{ item.played }}</td>
+                    <td>{{ item.won }}</td>
+                    <td>{{ item.drawn }}</td>
+                    <td>{{ item.lost }}</td>
+                    <td>{{ item.goals_for }}</td>
+                    <td>{{ item.goals_against }}</td>
+                    <td>{{ item.goal_difference }}</td>
+                    <td class="points-cell">{{ item.points }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="10" class="empty-standings">
+                        هنوز اطلاعاتی برای جدول رده‌بندی وجود ندارد.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+{% endblock %}

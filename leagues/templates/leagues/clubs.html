@@ -1,0 +1,81 @@
+{% extends "leagues/base.html" %}
+{% block title %}باشگاه‌ها | NDvarzesh{% endblock %}
+{% block nav_clubs %}active{% endblock %}
+{% block breadcrumb %}باشگاه‌ها{% endblock %}
+{% block content %}
+{% load static %}
+<section class="page-content">
+  <div class="welcome-row">
+    <div>
+      <div class="eyebrow"><span class="eyebrow-line"></span> بانک اطلاعاتی</div>
+      <h1>مدیریت <span>باشگاه‌ها</span></h1>
+      <p class="welcome-subtitle">باشگاه‌ها را ثبت کن تا بعداً تیم‌های رده‌های سنی را به آن‌ها متصل کنی.</p>
+    </div>
+    <a class="btn btn-primary" href="#add-club"><span class="plus">＋</span> ثبت باشگاه</a>
+  </div>
+  <div class="panel clubs-panel" id="add-club">
+    <div class="panel-header">
+      <div>
+        <div class="panel-kicker">CLUB DIRECTORY</div>
+        <h2>افزودن باشگاه جدید</h2>
+        <p>اطلاعات پایه باشگاه را وارد کن.</p>
+      </div><span class="panel-header-icon">⚑</span>
+    </div>
+    <h5 id="ErrorPlace"></h5>
+    {% if error %}<div class="form-error">{{ error }}</div>{% endif %}
+    <form action="{% url 'clubs' %}" method="post" class="club-form" enctype="multipart/form-data">
+      {% csrf_token %}
+      <label>نام باشگاه<input id="clubname" name="name" placeholder="مثلاً تراکتور تبریز"></label>
+      <label>شهر<input id="city" name="city" placeholder="مثلاً تبریز" value="تبریز"></label>
+      <label for="logo">لوگوی باشگاه</label>
+      <input type="file" name="logo" id="logo" accept="image/*"> <button id="addClubsBtn" class="btn btn-primary"
+        type="submit"><span class="plus">＋</span> ذخیره باشگاه</button>
+    </form>
+  </div>
+  <div class="panel clubs-panel">
+    <div class="panel-header">
+      <div>
+        <div class="panel-kicker">REGISTERED CLUBS</div>
+        <h2>فهرست باشگاه‌ها</h2>
+        <p>باشگاه‌های ثبت‌شده در سیستم</p>
+      </div><span class="count-pill">{{ clubs|length }} باشگاه</span>
+    </div>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>ردیف</th>
+            <th>نام باشگاه</th>
+            <th>شهر</th>
+            <th>وضعیت</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for club in clubs %}<tr>
+            <td class="muted-cell">{{ forloop.counter|stringformat:"02d" }}</td>
+            <td>
+              <div class="club-name-cell">
+                {% if club.logo %}
+                <img src="{{ club.logo.url }}" alt="{{ club.name }}" class="club-table-logo">
+                {% else %}
+                <span class="club-table-mark">⚽</span>
+                {% endif %}
+                <strong>{{ club.name }}</strong>
+              </div>
+            </td>
+            <td>{{ club.city|default:"—" }}</td>
+            <td><span class="status-pill"><i></i> ثبت‌شده</span></td>
+          </tr>
+          {% empty %}<tr>
+            <td colspan="4" class="empty-state">هنوز باشگاهی ثبت نشده؛ از فرم بالا اولین باشگاه را اضافه کن.</td>
+          </tr>{% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'leagues/clubs.js' %}"></script>
+{% endblock %}

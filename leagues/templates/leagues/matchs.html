@@ -1,0 +1,156 @@
+
+{% extends "leagues/base.html" %}
+
+{% block content %}
+<div class="page-content matches-page">
+
+    <!-- عنوان صفحه -->
+    <div class="matches-heading">
+        <div>
+            <span class="matches-eyebrow">NDVARZESH / FIXTURES</span>
+            <h1>برنامه مسابقات</h1>
+            <p>برنامه بازی‌ها و نتایج لیگ‌های پایه</p>
+        </div>
+
+        <div class="matches-heading-icon">⚽</div>
+    </div>
+
+    <!-- اطلاعات لیگ -->
+    <div class="matches-league-bar">
+    <div>
+        <span class="league-label">لیگ انتخاب‌شده</span>
+
+        <h2>
+            {% if league %}
+                {{ league.name }}
+            {% else %}
+                مسابقات لیگ
+            {% endif %}
+        </h2>
+    </div>
+
+    <form method="get">
+        <select name="leagueID" onchange="this.form.submit()">
+            {% for item in leagues %}
+                <option value="{{ item.id }}"
+                    {% if league and item.id == league.id %}selected{% endif %}>
+                    {{ item.name }} - {{ item.season.name }}
+                </option>
+            {% endfor %}
+        </select>
+    </form>
+</div>
+
+    <!-- هفته‌ها و مسابقات -->
+    <div class="rounds-container">
+
+        {% for round in rounds %}
+        <section class="round-section">
+
+            <div class="round-heading">
+                <div class="round-number">
+                    <span>هفته</span>
+                    <strong>{{ round.number }}</strong>
+                </div>
+
+                <div class="round-info">
+                    <h3>
+                        {% if round.name %}
+                            {{ round.name }}
+                        {% else %}
+                            هفته {{ round.number }}
+                        {% endif %}
+                    </h3>
+
+                    {% if round.start_date %}
+                        <span>{{ round.start_date|date:"Y/m/d" }}</span>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="matches-list">
+
+                {% for match in round.matches.all %}
+                <article class="match-card">
+
+                    <div class="match-status">
+                        <span class="status-dot status-{{ match.status }}"></span>
+                        {{ match.get_status_display }}
+                    </div>
+
+                    <div class="match-teams">
+
+                        <div class="match-team home-team">
+                            <strong>{{ match.home_entry.team.name }}</strong>
+                            <small>{{ match.home_entry.team.club.name }}</small>
+                        </div>
+
+                        <div class="match-result">
+                            {% if match.status == "played" %}
+                                <strong>
+                                    {{ match.home_score }}
+                                    <span>-</span>
+                                    {{ match.away_score }}
+                                </strong>
+                            {% else %}
+                                <strong class="vs-text">VS</strong>
+                            {% endif %}
+                        </div>
+
+                        <div class="match-team away-team">
+                            <strong>{{ match.away_entry.team.name }}</strong>
+                            <small>{{ match.away_entry.team.club.name }}</small>
+                        </div>
+
+                    </div>
+
+                    <div class="match-details">
+                        <span>
+                            📅
+                            {% if match.match_date %}
+                                {{ match.match_date|date:"Y/m/d" }}
+                            {% else %}
+                                تاریخ اعلام نشده
+                            {% endif %}
+                        </span>
+
+                        <span>
+                            🕒
+                            {% if match.match_date %}
+                                {{ match.match_date|date:"H:i" }}
+                            {% else %}
+                                ساعت اعلام نشده
+                            {% endif %}
+                        </span>
+
+                        <span>
+                            📍
+                            {% if match.venue %}
+                                {{ match.venue }}
+                            {% else %}
+                                محل اعلام نشده
+                            {% endif %}
+                        </span>
+                    </div>
+
+                </article>
+                {% empty %}
+                    <div class="empty-matches">
+                        هنوز مسابقه‌ای برای این هفته ثبت نشده است.
+                    </div>
+                {% endfor %}
+
+            </div>
+        </section>
+
+        {% empty %}
+            <div class="empty-matches empty-rounds">
+                <span>⚽</span>
+                <h3>هنوز برنامه‌ای ثبت نشده</h3>
+                <p>بعد از ثبت هفته‌ها و مسابقات در پنل مدیریت، اینجا نمایش داده می‌شوند.</p>
+            </div>
+        {% endfor %}
+
+    </div>
+</div>
+{% endblock %}

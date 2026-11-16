@@ -1,0 +1,205 @@
+```django
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NDvarzesh | فوتبال پایه آذربایجان شرقی</title>
+
+    <link rel="stylesheet" href="{% static 'leagues/public.css' %}">
+</head>
+<body>
+
+<header class="site-header">
+    <div class="container header-content">
+        <div class="brand">
+            <div class="brand-logo">
+                <img class="imgl" src="/static/leagues/l.jpg" alt="NDvarzesh">
+            </div>
+            <div>
+                <h1>NDvarzesh</h1>
+                <span>پایگاه فوتبال پایه آذربایجان شرقی</span>
+            </div>
+        </div>
+
+        <div class="header-label">فصل ۱۴۰۵ - ۱۴۰۶</div>
+    </div>
+</header>
+
+<main class="container">
+
+    <!-- انتخاب لیگ -->
+    <section class="league-selector">
+        <div class="section-heading">
+            <div>
+                <span class="eyebrow">COMPETITIONS</span>
+                <h2>مسابقات فوتبال پایه</h2>
+            </div>
+        </div>
+
+        <form method="GET" action="">
+            <select name="leagueID" onchange="this.form.submit()">
+                {% for item in leagues %}
+                    <option value="{{ item.id }}"
+                        {% if league and item.id == league.id %}selected{% endif %}>
+                        {{ item.name }}
+                    </option>
+                {% empty %}
+                    <option>لیگی ثبت نشده است</option>
+                {% endfor %}
+            </select>
+        </form>
+    </section>
+
+    {% if league %}
+
+    <!-- آخرین نتایج -->
+    <section class="content-section">
+        <div class="section-heading">
+            <div>
+                <span class="eyebrow">LATEST RESULTS</span>
+                <h2>آخرین نتایج</h2>
+            </div>
+        </div>
+
+        <div class="match-grid">
+            {% for match in results %}
+                <article class="match-card">
+                    <div class="match-meta">
+                        <span>{{ league.name }}</span>
+                        <span>هفته {{ match.round.number }}</span>
+                    </div>
+
+                    <div class="match-teams">
+                        <div class="team-name">
+                            <span class="team-icon">⚽</span>
+                            <strong>{{ match.home_entry.team.name }}</strong>
+                        </div>
+
+                        <div class="score">
+                            {{ match.home_score }}
+                            <span>:</span>
+                            {{ match.away_score }}
+                        </div>
+
+                        <div class="team-name">
+                            <span class="team-icon">⚽</span>
+                            <strong>{{ match.away_entry.team.name }}</strong>
+                        </div>
+                    </div>
+
+                    <div class="match-status">پایان مسابقه</div>
+                </article>
+            {% empty %}
+                <p>هنوز نتیجه‌ای برای این لیگ ثبت نشده است.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- برنامه مسابقات -->
+    <section class="content-section">
+        <div class="section-heading">
+            <div>
+                <span class="eyebrow">UPCOMING MATCHES</span>
+                <h2>برنامه مسابقات</h2>
+            </div>
+        </div>
+
+        <div class="upcoming-list">
+            {% for match in upcoming_matches %}
+                <article class="upcoming-card">
+                    <div class="round-number">
+                        هفته {{ match.round.number }}
+                    </div>
+
+                    <div class="upcoming-teams">
+                        <strong>{{ match.home_entry.team.name }}</strong>
+                        <span>VS</span>
+                        <strong>{{ match.away_entry.team.name }}</strong>
+                    </div>
+
+                    <div class="match-date">
+                        {% if match.match_date %}
+                            {{ match.match_date|date:"Y/m/d - H:i" }}
+                        {% else %}
+                            زمان اعلام نشده
+                        {% endif %}
+                    </div>
+                </article>
+            {% empty %}
+                <p>در حال حاضر مسابقه برنامه‌ریزی‌شده‌ای وجود ندارد.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- جدول رده بندی -->
+    <section class="content-section">
+        <div class="section-heading">
+            <div>
+                <span class="eyebrow">LEAGUE STANDINGS</span>
+                <h2>جدول رده‌بندی</h2>
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>رتبه</th>
+                        <th>تیم</th>
+                        <th>بازی</th>
+                        <th>برد</th>
+                        <th>مساوی</th>
+                        <th>باخت</th>
+                        <th>گل زده</th>
+                        <th>گل خورده</th>
+                        <th>تفاضل</th>
+                        <th>امتیاز</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for item in standings %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td class="table-team">{{ item.team.name }}</td>
+                        <td>{{ item.played }}</td>
+                        <td>{{ item.won }}</td>
+                        <td>{{ item.drawn }}</td>
+                        <td>{{ item.lost }}</td>
+                        <td>{{ item.goals_for }}</td>
+                        <td>{{ item.goals_against }}</td>
+                        <td>{{ item.goal_difference }}</td>
+                        <td class="points">{{ item.points }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="10">هنوز اطلاعاتی برای جدول ثبت نشده است.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    {% else %}
+        <div class="empty-state">
+            هنوز لیگی برای نمایش وجود ندارد.
+        </div>
+    {% endif %}
+
+</main>
+
+<footer class="site-footer">
+    <div class="container">
+        <h3>NDvarzesh</h3>
+        <p>پوشش اخبار، نتایج و استعدادهای فوتبال پایه آذربایجان شرقی</p>
+        <span>© تمامی حقوق محفوظ است</span>
+    </div>
+</footer>
+
+<script src="{% static 'leagues/public.js' %}"></script>
+</body>
+</html>
+```

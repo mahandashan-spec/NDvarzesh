@@ -1,0 +1,112 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Vazirmatn', sans-serif;
+    background: #14231b;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 430px;
+}
+
+.login-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 38px;
+    text-align: right;
+}
+
+.logo {
+    width: 58px;
+    height: 58px;
+    background: #c8f36b;
+    color: #14231b;
+    border-radius: 15px;
+    display: grid;
+    place-items: center;
+    font-size: 22px;
+    font-weight: 900;
+    margin-bottom: 25px;
+}
+
+h1 {
+    font-size: 23px;
+    color: #14231b;
+}
+
+.login-card p {
+    color: #84918a;
+    font-size: 12px;
+    margin-top: 10px;
+    margin-bottom: 27px;
+    line-height: 2;
+}
+
+label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 9px;
+    color: #26372e;
+}
+
+input {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #e3eae4;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    font-family: inherit;
+    outline: none;
+}
+
+input:focus {
+    border-color: #1d5638;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    background: #1d5638;
+    color: white;
+    font-family: inherit;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #143e28;
+}
+
+.error-message {
+    background: #fff0f0;
+    color: #c0392b;
+    border-radius: 9px;
+    padding: 12px;
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+
+.back-link {
+    display: block;
+    text-align: center;
+    margin-top: 23px;
+    color: #718078;
+    text-decoration: none;
+    font-size: 12px;
+}

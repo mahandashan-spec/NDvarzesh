@@ -1,0 +1,294 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="NDvarzesh؛ رسانه فوتبال پایه آذربایجان شرقی، اخبار، نتایج و معرفی استعدادها">
+    <title>NDvarzesh | رسانه فوتبال پایه</title>
+
+    <link rel="stylesheet" href="{% static 'leagues/home.css' %}">
+</head>
+<body>
+
+<header class="header">
+    <div class="container header-inner">
+
+        <a href="/" class="brand">
+            <div class="brand-logo">ND</div>
+            <div class="brand-info">
+                <strong>NDVARZESH</strong>
+                <span>رسانه فوتبال پایه</span>
+            </div>
+        </a>
+
+        <nav class="navigation" id="navigation">
+            <a href="/" class="active">صفحه اصلی</a>
+            <a href="#news">اخبار</a>
+            <a href="#talents">استعدادها</a>
+            <a href="/competitions/">مسابقات</a>
+            <a href="#about">درباره ما</a>
+        </nav>
+
+        <a href="/competitions" class="header-button">
+            مشاهده لیگ‌ها
+            <span>←</span>
+        </a>
+
+        <button class="menu-button" id="menuButton" aria-label="باز کردن منو">
+            ☰
+        </button>
+
+    </div>
+</header>
+
+
+<!-- نوار اخبار متحرک -->
+<section class="ticker">
+    <div class="container ticker-inner">
+        <span class="ticker-label">آخرین اخبار</span>
+
+        <div class="ticker-window">
+            <div class="ticker-track">
+                <span>به رسانه فوتبال پایه آذربایجان شرقی خوش آمدید</span>
+                <span>جدیدترین نتایج و اخبار مسابقات را در NDvarzesh دنبال کنید</span>
+                <span>معرفی استعدادهای فوتبال پایه تبریز</span>
+
+                <span>به رسانه فوتبال پایه آذربایجان شرقی خوش آمدید</span>
+                <span>جدیدترین نتایج و اخبار مسابقات را در NDvarzesh دنبال کنید</span>
+                <span>معرفی استعدادهای فوتبال پایه تبریز</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<main>
+
+    <!-- بنر اصلی -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+
+        <div class="container hero-content">
+
+            <span class="hero-tag">NDVARZESH SPORTS MEDIA</span>
+
+            <h1>
+                آینده فوتبال<br>
+                <span>از اینجا شروع می‌شود</span>
+            </h1>
+
+            <p>
+                پوشش اخبار، نتایج، مسابقات و معرفی استعدادهای فوتبال پایه
+                آذربایجان شرقی
+            </p>
+
+            <div class="hero-actions">
+                <a href="/competitions/" class="primary-button">
+                    ورود به دنیای مسابقات
+                    <span>←</span>
+                </a>
+
+                <a href="#news" class="secondary-button">
+                    مشاهده اخبار
+                </a>
+            </div>
+
+            <div class="hero-caption">
+                <span></span>
+                مرجع فوتبال پایه آذربایجان شرقی
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- دسترسی سریع -->
+    <section class="quick-section container">
+
+        <a href="/competitions/" class="quick-card">
+            <div class="quick-icon">🏆</div>
+            <div>
+                <strong>لیگ‌ها و مسابقات</strong>
+                <span>برنامه، نتایج و جدول رده‌بندی</span>
+            </div>
+            <b>←</b>
+        </a>
+
+        <a href="#news" class="quick-card">
+            <div class="quick-icon">📰</div>
+            <div>
+                <strong>اخبار فوتبال</strong>
+                <span>جدیدترین اتفاقات فوتبال پایه</span>
+            </div>
+            <b>←</b>
+        </a>
+
+        <a href="#talents" class="quick-card">
+            <div class="quick-icon">⚽</div>
+            <div>
+                <strong>استعدادهای فوتبال</strong>
+                <span>معرفی بازیکنان و مربیان</span>
+            </div>
+            <b>←</b>
+        </a>
+
+    </section>
+
+
+    <!-- اخبار -->
+    <section class="section container" id="news">
+
+        <div class="section-heading">
+            <div>
+                <span class="section-eyebrow">LATEST NEWS</span>
+                <h2>آخرین اخبار ورزشی</h2>
+                <p>جدیدترین رویدادهای فوتبال پایه استان</p>
+            </div>
+
+            <a href="#" class="more-link">همه اخبار ←</a>
+        </div>
+
+        <div class="news-grid">
+
+            <article class="news-card news-feature">
+                <div class="news-image news-image-one">
+                    <span class="news-category">فوتبال پایه</span>
+                </div>
+
+                <div class="news-content">
+                    <span class="news-date">NDVARZESH</span>
+                    <h3>جدیدترین اخبار و اتفاقات فوتبال پایه آذربایجان شرقی</h3>
+                    <p>
+                        پوشش اختصاصی مسابقات و رویدادهای فوتبال پایه استان
+                        در رسانه NDvarzesh
+                    </p>
+                    <a href="#">ادامه مطلب ←</a>
+                </div>
+            </article>
+
+
+            <article class="news-card">
+                <div class="news-image news-image-two">
+                    <span class="news-category">مسابقات</span>
+                </div>
+
+                <div class="news-content">
+                    <span class="news-date">NDVARZESH</span>
+                    <h3>پیگیری نتایج لیگ‌های پایه استان</h3>
+                    <p>نتایج و جدول مسابقات را دنبال کنید.</p>
+                    <a href="/competitions/">مشاهده مسابقات ←</a>
+                </div>
+            </article>
+
+
+            <article class="news-card">
+                <div class="news-image news-image-three">
+                    <span class="news-category">استعدادها</span>
+                </div>
+
+                <div class="news-content">
+                    <span class="news-date">NDVARZESH</span>
+                    <h3>نسل جدید ستاره‌های فوتبال تبریز</h3>
+                    <p>نگاهی به استعدادهای آینده فوتبال استان.</p>
+                    <a href="#talents">مشاهده استعدادها ←</a>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+
+    <!-- تبلیغات -->
+    <section class="advertising container">
+        <div class="advertising-content">
+            <span>BUSINESS & PARTNERSHIP</span>
+            <h2>جایگاه ویژه تبلیغات ورزشی</h2>
+            <p>
+                معرفی برندها، آکادمی‌ها و مجموعه‌های ورزشی در NDvarzesh
+            </p>
+            <a href="mailto:info@ndvarzesh.com">ارتباط جهت تبلیغات ←</a>
+        </div>
+
+        <div class="advertising-mark">ND</div>
+    </section>
+
+
+    <!-- معرفی استعدادها -->
+    <section class="section container talents-section" id="talents">
+
+        <div class="section-heading">
+            <div>
+                <span class="section-eyebrow">NEXT GENERATION</span>
+                <h2>ستاره‌های آینده فوتبال</h2>
+                <p>معرفی بازیکنان و مربیان مستعد فوتبال پایه</p>
+            </div>
+        </div>
+
+        <div class="talent-banner">
+            <div>
+                <span>YOUNG TALENTS</span>
+                <h2>هر استعداد،<br>یک داستان تازه</h2>
+                <p>فوتبال پایه را از نزدیک دنبال کنید.</p>
+            </div>
+
+            <div class="talent-symbol">⚽</div>
+        </div>
+
+    </section>
+
+
+    <!-- مسابقات -->
+    <section class="competition-section">
+        <div class="container competition-inner">
+
+            <div>
+                <span class="section-eyebrow">LEAGUES & RESULTS</span>
+                <h2>هیجان مسابقات را دنبال کن</h2>
+                <p>
+                    برنامه بازی‌ها، آخرین نتایج و جدول رده‌بندی
+                    لیگ‌های فوتبال پایه استان
+                </p>
+            </div>
+
+            <a href="/competitions/" class="competition-button">
+                ورود به بخش مسابقات
+                <span>←</span>
+            </a>
+
+        </div>
+    </section>
+
+</main>
+
+
+<footer class="footer" id="about">
+    <div class="container footer-inner">
+
+        <div>
+            <h2>NDVARZESH</h2>
+            <p>
+                رسانه فوتبال پایه آذربایجان شرقی؛
+                صدای استعدادها و همراه فوتبال استان
+            </p>
+        </div>
+
+        <div class="footer-links">
+            <a href="/">صفحه اصلی</a>
+            <a href="/competitions">مسابقات</a>
+            <a href="#news">اخبار</a>
+            <a href="#talents">استعدادها</a>
+        </div>
+
+    </div>
+
+    <div class="container footer-bottom">
+        © تمامی حقوق برای NDvarzesh محفوظ است.
+    </div>
+</footer>
+
+
+<script src="{% static 'leagues/home.js' %}"></script>
+</body>
+</html>

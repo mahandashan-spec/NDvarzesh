@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#071d18">
+  <title>{% block title %}NDvarzesh | مدیریت لیگ{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'leagues/style.css' %}">
+  {% block extra_head %}{% endblock %}
+</head>
+
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="/">
+        <span class="brand-mark"><span>ND</span><i>⚽</i></span>
+        <span class="brand-copy"><strong>ND<span>varzesh</span></strong><small>LEAGUE MANAGER</small></span>
+      </a>
+      <div class="sidebar-label">منوی اصلی</div>
+      <nav class="nav-menu">
+        <a class="nav-link {% block nav_dashboard %}{% endblock %}" href="/"><span
+            class="nav-icon">◫</span><span>داشبورد</span><span class="nav-arrow">‹</span></a>
+        <a class="nav-link {% block nav_leagues %}{% endblock %}" href="/admin/leagues/league/"><span
+            class="nav-icon">🏆</span><span>لیگ‌ها و مسابقات</span></a>
+        <a class="nav-link {% block nav_clubs %}{% endblock %}" href="/clubs/"><span
+            class="nav-icon">⚑</span><span>باشگاه‌ها</span></a>
+        <a class="nav-link" href="/teams/"><span class="nav-icon">♟</span><span>تیم‌ها</span></a>
+        <a class="nav-link" href="/matchs/"><span class="nav-icon">◷</span><span>برنامه مسابقات</span></a>
+        <a class="nav-link" href="/table/"><span class="nav-icon">☷</span><span>جدول رده‌بندی</span></a>
+      </nav>
+      <div class="sidebar-label sidebar-label-spaced">مدیریت</div>
+      <nav class="nav-menu">
+        <a class="nav-link" href="/admin/"><span class="nav-icon">⚙</span><span>پنل مدیریت</span></a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="sidebar-ball">⚽</div>
+        <div><strong>فوتبال، دقیق‌تر از همیشه</strong>
+          <p>مدیریت لیگ‌های پایه در یک نگاه</p>
+        </div>
+        <span class="online-dot"></span>
+      </div>
+      <div class="sidebar-footer">POWERED BY <b>NDVARZESH</b></div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <div class="topbar-right">
+          <button class="mobile-menu" id="menuToggle" aria-label="باز کردن منو">☰</button>
+<div class="breadcrumb"><span>NDvarzesh</span><b>/</b><strong>{% block breadcrumb %}داشبورد{% endblock %}</strong></div>        </div>
+        <div class="topbar-left">
+          <div class="live-status"><span></span> سیستم آماده است</div>
+          <button class="icon-button" title="اعلان‌ها" aria-label="اعلان‌ها">♧<i></i></button>
+          <div class="profile">
+            <div class="profile-avatar">ND</div>
+            <div class="profile-info"><strong>مدیر سیستم</strong><small>مدیریت مسابقات</small></div>
+            <span class="profile-chevron">⌄</span>
+          </div>
+          {% if user.is_authenticated %}
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">خروج از حساب</button>
+    </form>
+{% endif %}
+        </div>
+      </header>
+      {% block content %}{% endblock %}
+      <footer class="page-footer"><span>© NDvarzesh League Manager</span><span>ساخته‌شده برای فوتبال پایه آذربایجان شرقی
+          <b>♥</b></span></footer>
+    </main>
+  </div>
+  <div class="mobile-scrim" id="mobileScrim"></div>
+  <script src="{% static 'leagues/app.js' %}"></script>
+  {% block extra_js %}{% endblock %}
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ورود مدیر | NDvarzesh</title>
+    <link rel="stylesheet" href="{% static 'leagues/login.css' %}">
+</head>
+<body>
+
+<div class="login-container">
+    <div class="login-card">
+
+        <div class="logo">ND</div>
+
+        <h1>ورود به مدیریت</h1>
+        <p>برای ورود به پنل مدیریت NDvarzesh اطلاعات خود را وارد کنید.</p>
+
+        {% if form.errors %}
+            <div class="error-message">
+                نام کاربری یا رمز عبور اشتباه است.
+            </div>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+
+            <label for="id_username">نام کاربری</label>
+            <input
+                type="text"
+                name="username"
+                id="id_username"
+                placeholder="نام کاربری مدیر"
+                required
+                autofocus
+            >
+
+            <label for="id_password">رمز عبور</label>
+            <input
+                type="password"
+                name="password"
+                id="id_password"
+                placeholder="رمز عبور"
+                required
+            >
+
+            <input type="hidden" name="next" value="{{ next }}">
+
+            <button type="submit">ورود به پنل</button>
+        </form>
+
+        <a href="/" class="back-link">بازگشت به صفحه عمومی</a>
+
+    </div>
+</div>
+
+</body>
+</html>

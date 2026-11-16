@@ -1,0 +1,175 @@
+{% extends "leagues/base.html" %}
+{% load static %}
+
+{% block title %}تیم‌ها | NDvarzesh{% endblock %}
+{% block breadcrumb %}مدیریت تیم‌ها{% endblock %}
+
+{% block content %}
+
+<section class="page-content">
+
+    <!-- عنوان صفحه -->
+    <div class="welcome-row">
+        <div>
+            <div class="eyebrow">
+                <span class="eyebrow-line"></span>
+                بانک اطلاعاتی
+            </div>
+
+            <h1>مدیریت <span>تیم‌ها</span></h1>
+
+            <p class="welcome-subtitle">
+                تیم‌های باشگاه‌ها را در رده‌های سنی مختلف ثبت و مدیریت کن.
+            </p>
+        </div>
+
+        <a href="#add-team" class="btn btn-primary">
+            <span class="plus">＋</span>
+            ثبت تیم جدید
+        </a>
+    </div>
+
+
+    <!-- فرم ثبت تیم -->
+    <div class="panel clubs-panel" id="add-team">
+
+        <div class="panel-header">
+            <div>
+                <div class="panel-kicker">TEAM REGISTRATION</div>
+                <h2>افزودن تیم جدید</h2>
+                <p>اطلاعات تیم موردنظر را وارد کن.</p>
+            </div>
+
+            <span class="panel-header-icon">⚽</span>
+        </div>
+
+        <div id="ErrorPlace" class="form-error"></div>
+
+        <form method="post" class="club-form">
+
+            {% csrf_token %}
+
+            <label>
+                نام تیم
+                <input type="text" name="name" id="teamname" placeholder="مثلاً تراکتور زیر ۱۷ سال" required>
+            </label>
+
+            <label>
+                باشگاه
+                <select name="club" id="club" required>
+                    <option value="">انتخاب باشگاه</option>
+
+                    {% for club in clubs %}
+                    <option value="{{ club.id }}">
+                        {{ club.name }}
+                    </option>
+                    {% endfor %}
+
+                </select>
+            </label>
+
+            <label>
+                رده سنی
+                <select name="age_group" id="age_group" required>
+                    <option value="">انتخاب رده سنی</option>
+
+                    {% for age in age_groups %}
+                    <option value="{{ age.id }}">
+                        {{ age.name }}
+                    </option>
+                    {% endfor %}
+
+                </select>
+            </label>
+
+            <button type="submit" class="btn btn-primary" id="addTeamBtn">
+                <span class="plus">＋</span>
+                ذخیره تیم
+            </button>
+
+        </form>
+    </div>
+
+
+    <!-- جدول تیم‌ها -->
+    <div class="panel clubs-panel">
+
+        <div class="panel-header">
+            <div>
+                <div class="panel-kicker">REGISTERED TEAMS</div>
+                <h2>فهرست تیم‌ها</h2>
+                <p>تمام تیم‌های ثبت‌شده در سیستم</p>
+            </div>
+
+            <span class="count-pill">
+                {{ teams|length }} تیم
+            </span>
+        </div>
+
+        <div class="table-wrap">
+
+            <table class="data-table">
+
+                <thead>
+                    <tr>
+                        <th>ردیف</th>
+                        <th>نام تیم</th>
+                        <th>باشگاه</th>
+                        <th>رده سنی</th>
+                        <th>وضعیت</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for team in teams %}
+
+                    <tr>
+                        <td class="muted-cell">
+                            {{ forloop.counter|stringformat:"02d" }}
+                        </td>
+
+                        <td>
+                            <div class="team-info">
+                                {% if item.team.club.logo %}
+                                <img src="{{ item.team.club.logo.url }}" alt="{{ item.team.club.name }}">
+                                {% else %}
+                                <span class="club-table-mark">⚽</span>
+                                {% endif %}
+                                <span>{{ item.team.name }}</span>
+                            </div>
+                        </td>
+                        <td><strong>{{ team.name }}</strong></td>
+
+                        <td>{{ team.club.name }}</td>
+
+                        <td>{{ team.age_group.name }}</td>
+
+                        <td>
+                            <span class="status-pill">
+                                <i></i>
+                                ثبت‌شده
+                            </span>
+                        </td>
+                    </tr>
+
+                    {% empty %}
+
+                    <tr>
+                        <td colspan="5" class="empty-state">
+                            هنوز تیمی ثبت نشده است.
+                        </td>
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+    </div>
+
+</section>
+
+{% endblock %}
