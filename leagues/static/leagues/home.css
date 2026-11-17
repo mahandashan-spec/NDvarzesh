@@ -406,10 +406,9 @@ img {
     margin-top: 45px;
     padding: 40px;
     border-radius: 18px;
-    background:
-        linear-gradient(270deg, rgba(20, 35, 27, .97), rgba(29, 86, 56, .78)),
-        url('/static/leagues/images/talents.jpg') center/cover;
-    color: white;
+    background: linear-gradient(270deg,
+            rgba(20, 35, 27, .97),
+            rgba(29, 86, 56, .78));
 }
 
 .talent-banner span {
@@ -706,18 +705,15 @@ img {
 }
 
 .news-image-one {
-    background-image: linear-gradient(0deg, #14231b55, #14231b22),
-        url('/static/leagues/images/news-1.jpg');
+    background-image: linear-gradient(0deg, #14231b55, #14231b22);
 }
 
 .news-image-two {
-    background-image: linear-gradient(0deg, #14231b55, #14231b22),
-        url('/static/leagues/images/news-2.jpg');
+    background-image: linear-gradient(0deg, #14231b55, #14231b22);
 }
 
 .news-image-three {
-    background-image: linear-gradient(0deg, #14231b55, #14231b22),
-        url('/static/leagues/images/news-3.jpg');
+    background-image: linear-gradient(0deg, #14231b55, #14231b22);
 }
 
 .news-category {
