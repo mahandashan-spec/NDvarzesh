@@ -168,9 +168,9 @@ img {
     align-items: center;
     padding: 45px;
     color: white;
-    background:
-        linear-gradient(270deg, rgba(20, 35, 27, .97), rgba(20, 35, 27, .48)),
-        /* url('/static/leagues/images/hero.jpg') center/cover; */
+    background: linear-gradient(270deg,
+            rgba(20, 35, 27, .97),
+            rgba(20, 35, 27, .48));
 }
 
 .hero-content {
