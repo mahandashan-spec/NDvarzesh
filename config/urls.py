@@ -21,7 +21,7 @@ urlpatterns = [
     
     path("", home_page, name="home"),
         
-    path("competitions", view_page, name="view"),
+    path("competitions/", view_page, name="competitions"),
 
     path(
         "admin-login/",
